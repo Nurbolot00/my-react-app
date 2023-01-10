@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
+import PostList from './components/postList/PostList';
 import './App.css';
+import PostForm from './components/postForm/PostForm';
+
+
+const DUNNY_POSTS = [
+  {
+    id: 1,
+    title: "Saha",
+    body: "Description"
+  },
+  {
+    id: 2,
+    title: "Joha",
+    body: "Description"
+  },
+  {
+    id: 3,
+    title: "Baha",
+    body: "Description"
+  },
+  {
+    id: 4,
+    title: "Beka",
+    body: "Description"
+  }
+]
 
 function App() {
+  const [posts,setPosts] = useState(DUNNY_POSTS)
+
+  const addPostHandler = (newPost)=>{
+    console.log(newPost);
+    const updatedExpenses = [...posts]
+    updatedExpenses.push(newPost)
+    setPosts(updatedExpenses)
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PostForm onPost={addPostHandler}/>
+      <PostList posts={posts}/>
+      
+      
+      
     </div>
   );
 }
